@@ -3,7 +3,7 @@ node{
     
 properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')), [$class: 'JobLocalConfiguration', changeReasonComment: ''], pipelineTriggers([pollSCM('* * * * *')])])
 
-def mavenHome  = tool name: 'maven3.9.1'
+def mavenHome  = tool name: 'maven_latest'
 
 echo "The Job name is: ${JOB_NAME} " 
 echo "The Node name is:  ${NODE_NAME}"
@@ -12,7 +12,7 @@ echo "Jenkins Home path is: ${JENKINS_HOME}"
 
 
 stage('CheckoutCode'){
-git branch: 'development', credentialsId: 'aaa8e2c0-226a-40ba-85eb-259762d67c15', url: 'https://github.com/MithunTechnologiesDevOps/maven-web-application.git'
+git branch: 'development', credentialsId: '166c70a2-1df5-4993-a566-0a795862da8c', url: 'https://github.com/MithunTechnologiesDevOps/maven-web-application.git'
 }
 
 stage('Build')
@@ -30,8 +30,8 @@ sh "${mavenHome}/bin/mvn clean deploy"
 }
 
 stage('DeployAppIntoTomcat'){
-sshagent(['dd085870-ab36-4a86-9f5b-a915e179d45d']) {
-   sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.40.86:/opt/apache-tomcat-9.0.73/webapps/"
+sshagent(['f45e51a3-2c36-48ec-845a-adfb602820d3']){
+sh "scp -0 StrictHostKeyChecking=no /home/ubuntu/maven-web-application1/target ec2-user@172.31.53.226:/opt/apache_tomcat/webapps/"
 }
 }
 */
