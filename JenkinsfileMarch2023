@@ -29,7 +29,7 @@ sh "${mavenHome}/bin/mvn clean deploy"
 }
 
 stage('DeployAppIntoTomcat'){
-sh "cp target/maven-web-application.war /opt/apache_tomcat/webapps/
+sh "cp target/maven-web-application.war /opt/apache_tomcat/webapps/"
 }
 
 
