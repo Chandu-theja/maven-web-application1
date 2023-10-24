@@ -29,9 +29,7 @@ sh "${mavenHome}/bin/mvn clean deploy"
 }
 
 stage('DeployAppIntoTomcat'){
-sshagent(['f45e51a3-2c36-48ec-845a-adfb602820d3']){
 sh "cp target/maven-web-application.war /opt/apache_tomcat/webapps/
-}
 }
 
 
